@@ -21,18 +21,20 @@ angular.module("appModule")
 
         $scope.getPets();
 
-        $scope.addData = function(){
-            if($scope.textField.length >= 1) {
+        $scope.addData = function() {
+            if ($scope.textField.length >= 1) {
                 $scope.temp.push({text: $scope.textField});
                 $scope.textField = "";
             }
-            if($scope.weightField.length >= 1) {
+            if ($scope.weightField.length >= 1) {
                 $scope.temp.push({text: $scope.weightField});
                 $scope.weightField = "";
             }
-            $http.post('api/pets', $scope.temp).success(function(){
+            $http.post('api/pets', $scope.temp).success(function () {
                 $scope.getPets();
-        });
+
+            });
+        }
 
         $scope.removeData = function(index){
             $http.delete('/api/pets/' + $scope.data[index]._id).success(function(){
