@@ -48,4 +48,19 @@ angular.module("appModule")
             return $scope.data.length;
         };
 
+        $scope.bodyShame = function(){
+            var biggest = 0;
+            var nameBiggest = "";
+            var heavyWeight = "";
+            var i = 0;
+            for(i = 0; i < $scope.data.length; i++){
+                if ($scope.data[i].number >= biggest){
+                    biggest = $scope.data[i].number;
+                    nameBiggest = $scope.data[i].text;
+                };
+            };
+            heavyWeight = nameBiggest + " " + biggest;
+            return heavyWeight;
+        };
+
     });
