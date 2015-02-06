@@ -10,10 +10,11 @@
     <!-- Loading Javascript Stuff -->
     <script type="text/javascript" src="javascript/clientJavascript.js"></script>
     <script type="text/javascript" src="angularjs/angular.js"></script>
-    <script type="text/javascript" src="javascript/main.controller.js"></script>
+    <script type="text/javascript" src="javascript/GPACalc.controller.js"></script>
+
 </head>
-<body ng-app="mainApp" ng-controller="mainCtrl">
-<div ng-include="'views/navbar.html'"></div>
+<body ng-app="mainApp" ng-controller="gpaCtrl">
+<div ng-include="'components/navbar/navbar.html'"></div>
 <hr>
 <div class="container" ng-controller="gpaCtrl">
     <ul class="list-group">

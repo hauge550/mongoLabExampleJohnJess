@@ -45,6 +45,10 @@ var options = {
 // API Routes
 app.use('/api/pets', require('./api/pets'));
 
+//app.get('/views/GPACalc', function(req, res) {
+//    res.sendfile('GPACalc.html', options);
+//});
+
 // Non-API routes
 app.get('/*', function(req, res){
     res.sendFile('index.html', options);
