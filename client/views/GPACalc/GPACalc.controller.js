@@ -69,16 +69,16 @@ angular.module("appModule")
         });
         //}
 
-        $scope.addData = function() {
-            if ($scope.textField.length >= 1 && $scope.weightField >= 0) {
-                $scope.data.push({text: $scope.textField, number: $scope.weightField});
-                $scope.textField = "";
-                $scope.weightField = "";
-            }
-            $http.post('api/pets', $scope.data).success(function () {
-                $scope.getPets();
-            });
-        };
+        //$scope.addData = function() {
+        //    if ($scope.textField.length >= 1 && $scope.weightField >= 0) {
+        //        $scope.data.push({text: $scope.textField, number: $scope.weightField});
+        //        $scope.textField = "";
+        //        $scope.weightField = "";
+        //    }
+        //    $http.post('api/pets', $scope.data).success(function () {
+        //        $scope.getPets();
+        //    });
+        //};
     };
 
 
