@@ -9,6 +9,17 @@ var Pet = mongoose.model('Pet', {
     text: String,
     number: Number
 });
+
+// Defining GPA Model
+//=====================================================
+
+
+var saveClass = mongoose.model('saveClass', {
+    className: String,
+    gradeEarned: String,
+    numberOfCredits: Number
+});
+
 // Defining Routes
 // =====================================================
 

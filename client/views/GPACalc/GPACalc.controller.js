@@ -19,6 +19,14 @@ angular.module("appModule")
 
         var totalGradePoint = 0;
 
+        $scope.getSaveClass = function(){
+            $http.get('api/pets').success(function(pets) {
+                $scope.classes = pets;
+            });
+        };
+
+        $scope.getSaveClass();
+
     $scope.returnGradeValue = function(str){
         if (str === "A") {
             return 4.0;
@@ -49,6 +57,10 @@ angular.module("appModule")
             $scope.classField = "";
             $scope.gradeField = "";
             $scope.creditField = "";
+
+        $http.post('api/pets', $scope.classes).success(function () {
+            $scope.getSaveClass();
+        });
         //}
     };
 
@@ -66,17 +78,22 @@ angular.module("appModule")
     };
 
 
-
     //Removes class from table as well as updating global variables that affect the displayed GPA
-    $scope.removeClasses = function(index){
-        var gradeToRemove = "";
-        gradeToRemove = $scope.returnGradeValue($scope.classes[index].grade);
-        var creditsToRemove = "";
-        creditsToRemove = $scope.classes[index].credits;
-        totalGradePoint -= (gradeToRemove * creditsToRemove);
-        totalCredits -= creditsToRemove;
-        $scope.classes.splice(index,1);
-    };
+    //$scope.removeClasses = function(index){
+    //    var gradeToRemove = "";
+    //    gradeToRemove = $scope.returnGradeValue($scope.classes[index].grade);
+    //    var creditsToRemove = "";
+    //    creditsToRemove = $scope.classes[index].credits;
+    //    totalGradePoint -= (gradeToRemove * creditsToRemove);
+    //    totalCredits -= creditsToRemove;
+    //    $scope.classes.splice(index,1);
+    //};
+
+        $scope.removeClass = function(index){
+            $http.delete('/api/pets/' + $scope.classes[index]._id).success(function(){
+                $scope.getSaveClass();
+            });
+        };
 
 
     //Returns the name of a class that is dependant upon the quality of GPA
