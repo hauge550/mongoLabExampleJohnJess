@@ -32,6 +32,7 @@ mainApp.controller('gpaCtrl', function($scope){
             $scope.creditField = "";
         }
     };
+    
 
     $scope.currentGpa = function(){
         return (totalGradePoint/totalCredits).toFixed(3);
