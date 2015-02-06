@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>GPA Calculator</title>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+
+    <!-- Loading Javascript Stuff -->
+    <script type="text/javascript" src="javascript/clientJavascript.js"></script>
+    <script type="text/javascript" src="angularjs/angular.js"></script>
+    <script type="text/javascript" src="javascript/main.controller.js"></script>
+</head>
+<body ng-app="mainApp" ng-controller="mainCtrl">
+<div ng-include="'views/navbar.html'"></div>
+<hr>
+<div class="container" ng-controller="gpaCtrl">
+    <ul class="list-group">
+        <li class="list-group-item" ng-app="mainApp">
+            <h1>The BEST GPA Calculator</h1>
+            <!-- Input area -->
+            <form ng-submit="addClass()">
+                <input ng-model="classField" type="text" size="20" placeholder="Class Name">
+                <input ng-model="gradeField" ng-maxlength="1" type="text" size="17" placeholder="Letter Grade Earned">
+                <input ng-model="creditField" type="text" size="20" placeholder="Number of Credits">
+                <span class="floatRight">Classes in this calculator: {{classesInList()}}</span>
+                <br />
+                <br />
+                <span class="floatRight {{returnGpaColor(currentGpa())}}" id="GpaColor" >Total GPA: {{currentGpa()}}</span>
+                <input type="submit" value="submit" class="btn btn-primary"/>
+                <br />
+            </form>
+
+        </li>
+        <!--Table underneath input area that displays all classes added with the option of removing them -->
+        <li class="list-group-item" ng-repeat="test in classes">Class: {{test.class}}-----------Grade: {{test.grade}}-----------Credits: {{test.credits}}<span class="glyphicon glyphicon-remove floatRight" style="color: red"  ng-click="removeClasses($index)"></span></li>
+    </ul>
+</div>
+</body>
+</html>
