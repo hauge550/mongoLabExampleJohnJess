@@ -51,17 +51,34 @@ angular.module("appModule")
         //} else if(isNaN($scope.creditField)){
         //    incorrectCreditAlert();
         //} else {
-            $scope.classes.push({class:$scope.classField, grade:$scope.gradeField, credits:$scope.creditField});
+        if ($scope.classField.length >= 1 && $scope.gradeField.length >= 1 && $scope.creditField.length >= 1) {
+            $scope.classes.push({
+                className: $scope.classField,
+                gradeEarned: $scope.gradeField,
+                numberOfCredits: $scope.creditField
+            });
             totalCredits = totalCredits + parseInt($scope.creditField);
             totalGradePoint = totalGradePoint + (parseInt($scope.creditField) * parseInt($scope.returnGradeValue($scope.gradeField.toUpperCase())));
             $scope.classField = "";
             $scope.gradeField = "";
             $scope.creditField = "";
+        }
 
         $http.post('api/pets', $scope.classes).success(function () {
             $scope.getSaveClass();
         });
         //}
+
+        $scope.addData = function() {
+            if ($scope.textField.length >= 1 && $scope.weightField >= 0) {
+                $scope.data.push({text: $scope.textField, number: $scope.weightField});
+                $scope.textField = "";
+                $scope.weightField = "";
+            }
+            $http.post('api/pets', $scope.data).success(function () {
+                $scope.getPets();
+            });
+        };
     };
 
 
