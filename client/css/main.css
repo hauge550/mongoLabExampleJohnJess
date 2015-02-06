@@ -23,3 +23,15 @@ img {
 .floatRight {
     float: right;
 }
+
+.goodGrade {
+    color: green;
+}
+
+.okGrade {
+    color: #ffff00;
+}
+
+.badGrade {
+    color: red;
+}
