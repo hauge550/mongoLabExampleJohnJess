@@ -1,24 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>GPA Calculator</title>
-
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
-
-    <!-- Loading Javascript Stuff -->
-    <script type="text/javascript" src="javascript/clientJavascript.js"></script>
-    <script type="text/javascript" src="angularjs/angular.js"></script>
-    <script type="text/javascript" src="javascript/GPACalc.controller.js"></script>
-
-</head>
-<body ng-app="mainApp" ng-controller="gpaCtrl">
 <div ng-include="'components/navbar/navbar.html'"></div>
 <hr>
-<div class="container" ng-controller="gpaCtrl">
+<div class="container">
     <ul class="list-group">
-        <li class="list-group-item" ng-app="mainApp">
+        <li class="list-group-item">
             <h1>The BEST GPA Calculator</h1>
             <!-- Input area -->
             <form ng-submit="addClass()">
@@ -38,5 +22,3 @@
         <li class="list-group-item" ng-repeat="test in classes">Class: {{test.class}}-----------Grade: {{test.grade}}-----------Credits: {{test.credits}}<span class="glyphicon glyphicon-remove floatRight" style="color: red"  ng-click="removeClasses($index)"></span></li>
     </ul>
 </div>
-</body>
-</html>

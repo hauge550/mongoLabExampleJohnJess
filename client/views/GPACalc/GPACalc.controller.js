@@ -2,49 +2,22 @@
  * Created by lynch446 on 2/6/15.
  */
 //==================== GPA CONTROLLER ====================================
-mainApp.controller('gpaCtrl', function($scope){
-    $scope.classField = "";
+'use strict';
+angular.module("appModule")
+    .controller('gpaCtrl', function($scope, $http){
+        console.log("gpa controller loaded!");
 
-    $scope.gradeField = "";
+        $scope.classField = "";
 
-    $scope.creditField = "";
+        $scope.gradeField = "";
 
-    $scope.classes =[];
+        $scope.creditField = "";
 
-    var totalCredits = 0;
-    var totalGradePoint = 0;
+        $scope.classes =[];
 
-    $scope.addClass = function(){
-        if(!$scope.classField.length >=1){
-            incorrectClassAlert();
-        } else if(!$scope.gradeField.length == 1){
-            incorrectGradeAlert();
-        } else if(!$scope.creditField.length == 1){
-            incorrectCreditAlert();
-        } else if(isNaN($scope.creditField)){
-            incorrectCreditAlert();
-        } else {
-            $scope.classes.push({class:$scope.classField, grade:$scope.gradeField, credits:$scope.creditField});
-            totalCredits = totalCredits + parseInt($scope.creditField);
-            totalGradePoint = totalGradePoint + (parseInt($scope.creditField) * parseInt($scope.returnGradeValue($scope.gradeField.toUpperCase())));
-            $scope.classField = "";
-            $scope.gradeField = "";
-            $scope.creditField = "";
-        }
-    };
-    
+        var totalCredits = 0;
 
-    $scope.currentGpa = function(){
-        return (totalGradePoint/totalCredits).toFixed(3);
-    };
-
-    $scope.classesInList = function(){
-        return $scope.classes.length;
-    };
-
-    $scope.totalCredits = function(){
-        return totalCredits;
-    };
+        var totalGradePoint = 0;
 
     $scope.returnGradeValue = function(str){
         if (str === "A") {
@@ -60,10 +33,46 @@ mainApp.controller('gpaCtrl', function($scope){
         }
     };
 
+    $scope.addClass = function(){
+        //if(!$scope.classField.length >=1){
+        //    incorrectClassAlert();
+        //} else if(!$scope.gradeField.length == 1){
+        //    incorrectGradeAlert();currentGpa
+        //} else if(!$scope.creditField.length == 1){
+        //    incorrectCreditAlert();
+        //} else if(isNaN($scope.creditField)){
+        //    incorrectCreditAlert();
+        //} else {
+            $scope.classes.push({class:$scope.classField, grade:$scope.gradeField, credits:$scope.creditField});
+            totalCredits = totalCredits + parseInt($scope.creditField);
+            totalGradePoint = totalGradePoint + (parseInt($scope.creditField) * parseInt($scope.returnGradeValue($scope.gradeField.toUpperCase())));
+            $scope.classField = "";
+            $scope.gradeField = "";
+            $scope.creditField = "";
+        //}
+    };
+
+
+    $scope.currentGpa = function(){
+        return (totalGradePoint/totalCredits).toFixed(3);
+    };
+
+    $scope.classesInList = function(){
+        return $scope.classes.length;
+    };
+
+    $scope.totalCredits = function(){
+        return totalCredits;
+    };
+
+
+
     //Removes class from table as well as updating global variables that affect the displayed GPA
     $scope.removeClasses = function(index){
-        var gradeToRemove = $scope.returnGradeValue($scope.classes[index].grade);
-        var creditsToRemove = $scope.classes[index].credits;
+        var gradeToRemove = "";
+        gradeToRemove = $scope.returnGradeValue($scope.classes[index].grade);
+        var creditsToRemove = "";
+        creditsToRemove = $scope.classes[index].credits;
         totalGradePoint -= (gradeToRemove * creditsToRemove);
         totalCredits -= creditsToRemove;
         $scope.classes.splice(index,1);
