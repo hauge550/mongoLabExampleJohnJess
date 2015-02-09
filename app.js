@@ -48,6 +48,7 @@ app.use('/api/pets', require('./api/pets'));
 //app.get('/views/GPACalc', function(req, res) {
 //    res.sendfile('GPACalc.html', options);
 //});
+app.use('/api/classes', require('./api/classes'));
 
 // Non-API routes
 app.get('/*', function(req, res){

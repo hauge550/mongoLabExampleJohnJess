@@ -21,6 +21,7 @@ angular.module("appModule")
 
         $scope.getSaveClass = function(){
             $http.get('api/classes').success(function(classes) {
+                console.log(classes);
                 $scope.ourClasses = classes;
             });
         };
@@ -42,18 +43,22 @@ angular.module("appModule")
     };
 
     $scope.addClass = function(){
+        console.log("before the if");
         if ($scope.classField.length >= 1 && $scope.gradeField.length >= 1 && $scope.creditField.length >= 1) {
-            $scope.ourClasses.push({
-                className: $scope.classField,
-                gradeEarned: $scope.gradeField,
-                numberOfCredits: $scope.creditField
-            });
+            console.log("inside the if");
+            $scope.ourClasses.push(
+                {className: $scope.classField, gradeEarned: $scope.gradeField, numberOfCredits: $scope.creditField}
+            );
+            console.log("after the push");
             totalCredits = totalCredits + parseInt($scope.creditField);
             totalGradePoint = totalGradePoint + (parseInt($scope.creditField) * parseInt($scope.returnGradeValue($scope.gradeField.toUpperCase())));
+
+            $scope.classField = "";
+            $scope.gradeField = "";
+            $scope.creditField = "";
         }
-        $scope.classField = "";
-        $scope.gradeField = "";
-        $scope.creditField = "";
+        console.log("after the if");
+
 
         $http.post('api/classes', $scope.ourClasses).success(function () {
             $scope.getSaveClass();
