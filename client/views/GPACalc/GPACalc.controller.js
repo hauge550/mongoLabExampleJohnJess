@@ -13,15 +13,15 @@ angular.module("appModule")
 
         $scope.creditField = "";
 
-        $scope.classes =[];
+        $scope.ourClasses = [];
 
         var totalCredits = 0;
 
         var totalGradePoint = 0;
 
         $scope.getSaveClass = function(){
-            $http.get('api/pets').success(function(pets) {
-                $scope.classes = pets;
+            $http.get('api/classes').success(function(classes) {
+                $scope.ourClasses = classes;
             });
         };
 
@@ -42,33 +42,22 @@ angular.module("appModule")
     };
 
     $scope.addClass = function(){
-        //if(!$scope.classField.length >=1){
-        //    incorrectClassAlert();
-        //} else if(!$scope.gradeField.length == 1){
-        //    incorrectGradeAlert();currentGpa
-        //} else if(!$scope.creditField.length == 1){
-        //    incorrectCreditAlert();
-        //} else if(isNaN($scope.creditField)){
-        //    incorrectCreditAlert();
-        //} else {
         if ($scope.classField.length >= 1 && $scope.gradeField.length >= 1 && $scope.creditField.length >= 1) {
-            $scope.classes.push({
+            $scope.ourClasses.push({
                 className: $scope.classField,
                 gradeEarned: $scope.gradeField,
                 numberOfCredits: $scope.creditField
             });
             totalCredits = totalCredits + parseInt($scope.creditField);
             totalGradePoint = totalGradePoint + (parseInt($scope.creditField) * parseInt($scope.returnGradeValue($scope.gradeField.toUpperCase())));
-            $scope.classField = "";
-            $scope.gradeField = "";
-            $scope.creditField = "";
         }
+        $scope.classField = "";
+        $scope.gradeField = "";
+        $scope.creditField = "";
 
-        $http.post('api/pets', $scope.classes).success(function () {
+        $http.post('api/classes', $scope.ourClasses).success(function () {
             $scope.getSaveClass();
         });
-        //}
-
         //$scope.addData = function() {
         //    if ($scope.textField.length >= 1 && $scope.weightField >= 0) {
         //        $scope.data.push({text: $scope.textField, number: $scope.weightField});
@@ -87,7 +76,7 @@ angular.module("appModule")
     };
 
     $scope.classesInList = function(){
-        return $scope.classes.length;
+        return $scope.ourClasses.length;
     };
 
     $scope.totalCredits = function(){
@@ -107,7 +96,7 @@ angular.module("appModule")
     //};
 
         $scope.removeClass = function(index){
-            $http.delete('/api/pets/' + $scope.classes[index]._id).success(function(){
+            $http.delete('/api/classes/' + $scope.ourClasses[index]._id).success(function(){
                 $scope.getSaveClass();
             });
         };
